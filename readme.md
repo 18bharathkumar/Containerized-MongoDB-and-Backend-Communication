@@ -43,13 +43,14 @@ docker run -d -v mongovolume:/data/db --name mymongo --network mongonetwork mong
 - Here, the container name is `mymongo`.
 - The network to which the container is attached is `mongonetwork`.
 
-### Starting the backend application connected to the network:
+**Starting the backend application connected to the network:**
 
 ```bash
-docker run -d -p 3000:3000 --name mongobackend --network mongonetwork mongoapp
+docker run -d -p 3000:3000 --name mongobackend --network mongonetwork mongoapp4
 ```
 
-**setting up the project locally**
+
+# setting up the project locally
 
 ```bash
 
