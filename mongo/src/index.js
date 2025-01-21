@@ -21,6 +21,10 @@ const connectDB = async () => {
     }
   };
 
+  app.get('/',(req,res)=>{
+    res.json({mssg:"api is healthy"})
+  })
+
 app.get("/users", async (req, res) => {
   try {
     const users = await User.find();

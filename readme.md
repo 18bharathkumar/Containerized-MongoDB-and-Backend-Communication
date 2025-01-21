@@ -49,4 +49,46 @@ docker run -d -v mongovolume:/data/db --name mymongo --network mongonetwork mong
 docker run -d -p 3000:3000 --name mongobackend --network mongonetwork mongoapp
 ```
 
+**setting up the project locally**
+
+```bash
+
+git clone https://github.com/18bharathkumar/Containerized-MongoDB-and-Backend-Communication.git
+
+```
+```bash 
+cd Containerized-MongoDB-and-Backend-Communication/mongo
+
+```
+**building docker image**
+```bash 
+docker build -t mongoapp .
+```
+**creating network and volume**
+
+```bash 
+docker volume create mongovolum
+
+docker network create mongonetwork
+```
+
+**running mongoapp image(creating a container of mongoapp)**
+
+```bash 
+docker run -d -v mongovolum:/data/db --name mymongo --network mongonetwork  mongo
+```
+
+**running backend image with network attached**
+
+```bash
+docker run  -p 3000:3000 --name mongobackend --network mongonetwork mongoapp
+```
+
+
 This command starts the backend application, and it is connected to the `mongonetwork` network, allowing it to communicate with the MongoDB container.
+
+**now you can test the api by hitting http://localhost:3000/**
+
+<h2> here there is not need of manuall installation of mongodb nodejs <h2>
+
+
