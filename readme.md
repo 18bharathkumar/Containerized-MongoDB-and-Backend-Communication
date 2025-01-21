@@ -49,7 +49,7 @@ docker run -d -v mongovolume:/data/db --name mymongo --network mongonetwork mong
 docker run -d -p 3000:3000 --name mongobackend --network mongonetwork mongoapp
 ```
 
-**setting up the project locally**
+#setting up the project locally
 
 ```bash
 
