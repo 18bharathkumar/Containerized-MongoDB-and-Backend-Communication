@@ -10,7 +10,7 @@ app.use(express.json());
 const connectDB = async () => {
     try {
       // here we are connecting to mymongo conatiner of port 27017 (so there is no need of port mapping also)
-      await mongoose.connect('mongodb://mymongo//:27017/myDatabase', {
+      await mongoose.connect('mongodb://mymongo:27017/myDatabase', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
