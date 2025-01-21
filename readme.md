@@ -1,57 +1,52 @@
-# Doker for Database
 
-**need of volume**
+# Docker for Database
 
-<p> if we just run the like mongo image (start the mongo container) then when the we kill the container then the data will be lost <p>
+### Need for Volume
 
-**instaed of doing this**
+If we just run the Mongo image (start the Mongo container), then when we kill the container, the data will be lost.
 
-``` bash
-docker run -p 27017:27018 mongo 
+### Instead of doing this:
+
+```bash
+docker run -p 27017:27018 mongo
 ```
-<h4> here the mongo db is running at the port 27017 of conatiner and it is mapped to port 27018 of host machine <h4>
 
-if we kill the container then data will be lost 
+Here, the MongoDB is running on port 27017 of the container and is mapped to port 27018 of the host machine. However, if we kill the container, the data will be lost.
 
-**we do this**
+### We do this:
 
-``` bash 
-docker run -v mongovolum:/data/db -p 27018:27018 mongo 
+```bash
+docker run -v mongovolume:/data/db -p 27018:27018 mongo
 ```
-**mongovolum** 
-<p> volume name <p>
 
-**/data/db** 
-the data will be stored in this dir so here we are specifing the data in the volume to be stored in in dir 
+- **mongovolume**: This is the volume name.
+- **/data/db**: The data will be stored in this directory inside the container. We are specifying that the data should be stored in this directory in the volume.
 
-**Networks**
+### Networks
 
-<p> Allow the Docker Container to Communicate with each other <p> 
+Networks allow Docker containers to communicate with each other.
 
-<h4> localhost in the docker means its own network not the network of host machine <h4>
+- **Note**: `localhost` inside a Docker container refers to the container's own network, not the host machine's network.
 
-**command to create network**
+### Command to create a network:
 
-```bash 
+```bash
 docker network create networkname
 ```
- 
 
-```bash 
-docker run -d -v mongovolum:/data/db --name mymongo --network mongonetwork  mongo
-```
-here the conatiner name is : mymongo
-<br>
-network to which we are attaching is : mongonetwork
+### Running the MongoDB container with volume and network:
 
-
-**Starting the backend application whcih is connected to network**
 ```bash
-
-docker run -d -p 3000:3000 --name mongobackend --network mongonetwork mongoapp
-
+docker run -d -v mongovolume:/data/db --name mymongo --network mongonetwork mongo
 ```
 
+- Here, the container name is `mymongo`.
+- The network to which the container is attached is `mongonetwork`.
 
+### Starting the backend application connected to the network:
 
+```bash
+docker run -d -p 3000:3000 --name mongobackend --network mongonetwork mongoapp
+```
 
+This command starts the backend application, and it is connected to the `mongonetwork` network, allowing it to communicate with the MongoDB container.
